@@ -3,7 +3,7 @@ const { AwsCdkConstructLibrary } = require('projen');
 const project = new AwsCdkConstructLibrary({
   authorAddress: "damadden88@googlemail.com",
   authorName: "Martin Mueller",
-  cdkVersion: "1.73.0",
+  cdkVersion: "1.74.0",
   name: "cdk-alps-spec-rest-api",
   repository: "https://github.com/mmuller88/cdk-alps-spec-rest-api.git",
   cdkDependencies: [
