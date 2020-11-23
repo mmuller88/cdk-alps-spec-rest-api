@@ -13,7 +13,7 @@ export class IntegTesting {
 
     const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
-    new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {});
+    new AlpsSpecRestApi(stack, 'AlpsSpecRestApi');
 
     this.stack = [stack];
   }
