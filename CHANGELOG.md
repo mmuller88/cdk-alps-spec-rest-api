@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.0.3...v0.0.4) (2020-11-23)
+
+
+### Features
+
+* add unit tests ([13b82bd](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/13b82bd553d09d5e96bddf5f282a23154c7ab89e))
+
 ### 0.0.3 (2020-11-23)
 
 
