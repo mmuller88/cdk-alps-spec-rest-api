@@ -3,4 +3,5 @@
   "settings": {},
   "editor.formatOnSave": true,
   "prettier.singleQuote": true,
+  "prettier.trailingComma": true,
 }

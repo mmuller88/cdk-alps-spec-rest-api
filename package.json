@@ -59,7 +59,8 @@
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.74.0",
-    "@aws-cdk/core": "^1.74.0"
+    "@aws-cdk/core": "^1.74.0",
+    "unified": "https://github.com/mamund/alps-unified"
   },
   "bundledDependencies": [],
   "keywords": [

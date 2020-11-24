@@ -8,6 +8,8 @@ CDK Construct library constructed with the help of Pahud https://www.youtube.com
 
 # ALPS
 
+https://github.com/mamund/alps-unified
+
 # Sample
 
 ```ts
@@ -16,4 +18,10 @@ const app = new cdk.App();
 const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
 new AlpsSpecRestApi(stack, 'AlpsSpecRestApi');
+```
+
+# Deploy the CDK stack
+
+```ts
+npx cdk --app lib/integ.default.js --profile damadden88 deploy
 ```

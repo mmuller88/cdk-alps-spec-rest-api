@@ -6,6 +6,9 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: "1.74.0",
   name: "cdk-alps-spec-rest-api",
   repository: "https://github.com/mmuller88/cdk-alps-spec-rest-api.git",
+  dependencies: {
+    'unified':'https://github.com/mamund/alps-unified',
+  },
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-apigateway',

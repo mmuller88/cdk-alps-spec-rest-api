@@ -1,0 +1,672 @@
+openapi: "3.0.1"
+info:
+  title: "The Alfresco Provisioner "
+  description: "Again thank you so much for testing the Alfresco Provisioner."
+servers:
+- url: "https://api@@API_STAGE@@.alfpro.net"
+paths:
+  /instances:
+    get:
+      tags:
+        - instances
+      operationId: getInstances
+      description: |
+        Gets details about all running Alfresco instances. Notice as there is no permission context implemented yet you can view all / specific instances with leaving out the userId parameter oder take a userId from another user.
+      parameters:
+        - $ref: '#/components/parameters/userIdQueryParam'
+      security:
+        - AlfCDKAuthorizer:
+          - aws.cognito.signin.user.admin
+          # - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-request-validator: "Validator"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:getInstancesApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: |
+            The urls will be available after about 3 minutes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceList'
+        401:
+          description: Authorization information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        # default:
+        #   description: unexpected Error
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/Error'
+    options:
+      tags:
+        - instances
+      operationId: optionsInstances
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:optionsApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+  /instances/{instanceId}:
+    get:
+      tags:
+        - instances
+      operationId: getInstance
+      description: |
+        Gets details about a specific instanceId.
+      parameters:
+        - $ref: '#/components/parameters/instanceIdPathParam'
+      responses:
+        200:
+          description: |
+            The urls will be available after about 3 minutes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+        400:
+          description: Bad request. instanceId is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        401:
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        404:
+          description: Conf with instanceId doesn't exist or instanceId doesn't belong to userId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoundError'
+      security:
+        - AlfCDKAuthorizer:
+          - aws.cognito.signin.user.admin
+          # - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:getInstancesApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+    options:
+      tags:
+        - instances
+      parameters:
+        - $ref: '#/components/parameters/instanceIdPathParam'
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:optionsApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      operationId: optionsInstance
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+  /instances-conf:
+    get:
+      tags:
+        - instances-conf
+      operationId: getInstanceConfs
+      description: |
+        Gets details about all requested Alfresco instances. If you see here your requested Alfresco instance it is likely that it was created already. However it is not guarented as might your limit per user is reached or other the overall maximum limit of instances was reached.
+      parameters:
+        - $ref: '#/components/parameters/userIdQueryParam'
+      x-amazon-apigateway-request-validator: "Validator"
+      security:
+        - AlfCDKAuthorizer:
+          - aws.cognito.signin.user.admin
+          # - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:getAllConfApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: |
+            Successfully retrieved details about the instance configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConfList'
+        401:
+          description: Authorization information is missing or invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        # default:
+        #   description: unexpected Error
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - instances-conf
+      operationId: addInstanceConf
+      description: |
+        Creates an Alfresco instance request. Per userId you can only create max 2 instances! Please check how much you already have created as you don't get a warning here!
+
+        After your created successfully an instance request check out the GET /instances​/{instanceId} endpoint with your instanceId.
+
+        Please regard that the alfresco instance needs about 3 minutes for beeing reachable.
+      requestBody:
+        description: Body for Alf Instance Create. Please insert your username for userId.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewInstanceConf"
+        required: true
+      security:
+        - AlfCDKAuthorizer:
+          - aws.cognito.signin.user.admin
+          # - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-request-validator: "Validator"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:createConfApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        201:
+          description: Alf instance creation initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceConf"
+        400:
+          description: Bad request. **gitRepo** or **ec2InstanceType** doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        401:
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        # default:
+        #   description: unexpected Error
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/Error'
+    options:
+      tags:
+        - instances-conf
+      operationId: optionInstanceConf
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:optionsApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+  /instances-conf/{instanceId}:
+    get:
+      tags:
+        - instances-conf
+      operationId: getInstanceConf
+      description: |
+        Gets details about a specific alfresco request configuration.
+      parameters:
+        - $ref: '#/components/parameters/instanceIdPathParam'
+        - in: query
+          name: userId
+          description: User id Query Parameter. Please use you user name from the system.
+          required: true
+          schema:
+            $ref: '#/components/schemas/userId'
+      security:
+      - AlfCDKAuthorizer:
+        - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-request-validator: "Validator"
+      x-amazon-apigateway-integration:
+        uri: 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:getOneConfApi/invocations'
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: |
+            Successfully retrieved details about the instance configurations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConf'
+        400:
+          description: Bad request. instanceId or userId is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        401:
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        404:
+          description: Conf with instanceId doesn't exist or instanceId doesn't belong to userId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoundError'
+    put:
+      tags:
+        - instances-conf
+      operationId: updateInstanceConf
+      description: |
+        Requests attribute instance changes. Please regard if you put back your instance from stopped to running it can take some minutes for ACS finishing booting.
+      parameters:
+        - $ref: '#/components/parameters/instanceIdPathParam'
+      requestBody:
+        description: Body for Alf Instance Update. Currently only the update of the status is supported!
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutInstanceConf"
+        required: true
+      security:
+      - AlfCDKAuthorizer:
+        - "aws.cognito.signin.user.admin"
+      x-amazon-apigateway-request-validator: "Validator"
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:updateApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        201:
+          description: Alf instance Conf updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstanceConf"
+        400:
+          description: Bad request. Not supported state for **expectedStatus** .
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        401:
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthError'
+        403:
+          description: You are not allowed to access the instance-conf or you tried to change state from terminated to something else which isn't possible.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateError'
+        404:
+          description: Conf with instanceId doesn't exist or instanceId doesn't belong to userId
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoundError'
+        # default:
+        #   description: unexpected Error
+        #   content:
+        #     application/json:
+        #       schema:
+        #         $ref: '#/components/schemas/Error'
+    options:
+      tags:
+        - instances-conf
+      operationId: optionsInstancesConf
+      parameters:
+        - $ref: '#/components/parameters/instanceIdPathParam'
+      x-amazon-apigateway-integration:
+        uri: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:optionsApi/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+        credentials: "arn:aws:iam::981237193288:role/apiRole-@@STAGE@@"
+      responses:
+        200:
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+components:
+  parameters:
+    userIdQueryParam:
+      in: query
+      name: userId
+      description: User id Query Parameter. Please use you user name from the system.
+      required: false
+      schema:
+        $ref: '#/components/schemas/userId'
+    instanceIdPathParam:
+      in: path
+      name: instanceId
+      #description: alf instance id path parameter. Consist of 5 characters!
+      required: true
+      schema:
+        $ref: '#/components/schemas/instanceId'
+  schemas:
+    Error:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    FoundError:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Not Found
+    AuthError:
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Unauthorized
+    ValidationError:
+      required:
+        - message
+        - validationErrors
+      properties:
+        message:
+          type: string
+          example: Invalid request body
+        validationErrors:
+          type: string
+          example: '[instance value ("terminatedd") not found in enum (possible values: ["running","terminated","stopped"])]'
+    UpdateError:
+      allOf:
+        - $ref: '#/components/schemas/Error'
+        - required:
+          - instanceConf
+          properties:
+            schema:
+              $ref: "#/components/schemas/InstanceConf"
+    InstanceList:
+      additionalProperties: false
+      type: array
+      items:
+        $ref: '#/components/schemas/Instance'
+    Instance:
+      additionalProperties: false
+      type: object
+      required:
+        - instanceId
+        - status
+        - adminCredentials
+      properties:
+        instanceId:
+          $ref: '#/components/schemas/instanceId'
+        status:
+          type: string
+          $ref: '#/components/schemas/status'
+        adminCredentials:
+          additionalProperties: false
+          type: object
+          required:
+            - userName
+            - password
+          properties:
+            userName:
+              type: string
+              example: admin
+            password:
+              type: string
+              example: admin
+        # info:
+        #   type: string
+        #   description: Specific information about the ACS Deployment
+        url:
+          type: string
+          example: w23d.alfpro.net
+          description: |
+            The Url to access ACA. Currently only http is supported. Urls are ACA = ../ Share = ../share Alfresco = ../alfresco . It takes up to 3 minutes until this url becomes available. In future I plan to implement a healthcheck (probably leveraging AWS AutoScaling) to make the readiness of ACS more feaseble.
+
+            The propagation of the DNS Record normally takes a bit longer. Alternatively you can use the awsUrl to access your instance.
+        awsUrl:
+          type: string
+          example: ec2-35-176-42-57.eu-west-2.compute.amazonaws.com
+          description: |
+            Alternative url for the Alfresco instance.
+        # shortLived:
+        #   $ref: '#/components/schemas/shortLived'
+    InstanceConfList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceConf'
+    InstanceConf:
+      additionalProperties: false
+      allOf:
+        - $ref: '#/components/schemas/NewInstanceConf'
+        - required:
+          - instanceId
+          - expectedStatus
+          properties:
+            instanceId:
+              $ref: '#/components/schemas/instanceId'
+            expectedStatus:
+              $ref: '#/components/schemas/expectedStatus'
+            # lastStatus:
+            #   $ref: '#/components/schemas/lastStatus'
+    NewInstanceConf:
+      additionalProperties: false
+      type: object
+      required:
+        - userId
+      properties:
+        alfType:
+          $ref: '#/components/schemas/alfType'
+        tags:
+          $ref: '#/components/schemas/tags'
+        userId:
+          $ref: '#/components/schemas/userId'
+        # shortLived:
+        #   $ref: '#/components/schemas/shortLived'
+    PutInstanceConf:
+      additionalProperties: false
+      type: object
+      required:
+        - userId
+      properties:
+        expectedStatus:
+          $ref: '#/components/schemas/expectedStatus'
+        userId:
+          $ref: '#/components/schemas/userId'
+    userId:
+      additionalProperties: false
+      # default: alfresco
+      type: string
+      description: Simple user name. Please use your user name from the system.
+      example: martin
+      pattern: "[a-zA-Z0-9]{2,64}"
+      minLength: 2
+      maxLength: 64
+    instanceId:
+      additionalProperties: false
+      type: string
+      description: User Instance Identifier created with node uuid. Consists of 5 characters!
+      pattern: "[a-z0-9]{5,5}"
+      example: 'iew2m'
+      minLength: 5
+      maxLength: 5
+    tags:
+      type: object
+      description: 'Tags. You can add more tags if you want. For example "notice" : "Thats an instance for Bob"'
+      properties:
+        name:
+          type: string
+          description: A Name which will be attached as Name Tag to the EC2 Instance
+          example: No Name
+          default: No Name
+    # lastStatus:
+    #   additionalProperties: false
+    #   type: object
+    #   description: Information about when the status was successfully changed last time
+    #   required:
+    #     - lastUpdate
+    #     - status
+    #   properties:
+    #     lastUpdate:
+    #       type: string
+    #       format: date
+    #     status:
+    #       $ref: '#/components/schemas/status'
+    # expectedStatus:
+    status:
+      # additionalProperties: false
+      type: string
+      description: Shows the current state. Even if your instance is in the running state it might take some minutes until the provided url is reachable.
+      enum:
+        - running
+        - terminated
+        - stopped
+        - pending
+        - stopping
+      default: running
+    expectedStatus:
+      # additionalProperties: false
+      type: string
+      description: The state you are allow to put your instance in. Warning putting instances into terminated will delete the instance-conf and instance!
+      enum:
+        - running
+        - terminated
+        - stopped
+      default: running
+    alfType:
+      additionalProperties: false
+      type: object
+      required:
+        - ec2InstanceType
+        - gitRepo
+      properties:
+        ec2InstanceType:
+          type: string
+          description: |
+            Supported Ec2 Instance Type. Supported are:
+            t2.large - 2 CPU, 8 GB RAM
+            t2.xlarge - 4 CPU, 16 GB RAM
+          enum:
+            - t2.large
+            - t2.xlarge
+          default: t2.large
+        gitRepo:
+          type: string
+          description: |
+            Name of supported Alfresco Docker Compose Deployment deployed with the Alfresco installer.
+            alf-ec-1 : ACS 6.2 Community, ACA
+          enum:
+            - alf-ec2-1
+          default: alf-ec2-1
+    # shortLived:
+    #   additionalProperties: false
+    #   type: boolean
+    #   description: If true it will terminate after 55 min. Otherwise it will live for 3 days.
+    #   default: true
+  securitySchemes:
+    AlfCDKAuthorizer:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "cognito_user_pools"
+      x-amazon-apigateway-authorizer:
+        providerARNs:
+        - "arn:aws:cognito-idp:us-east-1:981237193288:userpool/us-east-1_8c1pujn9g"
+        type: "cognito_user_pools"
+# x-amazon-apigateway-gateway-responses:
+#   BAD_REQUEST_BODY:
+#     responseParameters:
+#       gatewayresponse.header.Access-Control-Exposed-Headers: "'ETag','x-amz-meta-custom-header','Authorization','Content-Type','Accept'"
+#       gatewayresponse.header.Access-Control-Allow-Methods: "'*'"
+#       gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+#       gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+#     responseTemplates:
+#       application/json: "{\"message\":$context.error.messageString,\"validationErrors\"\
+#         :\"$context.error.validationErrorString\"}"
+#   DEFAULT_4XX:
+#     responseParameters:
+#       gatewayresponse.header.Access-Control-Exposed-Headers: "'ETag','x-amz-meta-custom-header','Authorization','Content-Type','Accept'"
+#       gatewayresponse.header.Access-Control-Allow-Methods: "'*'"
+#       gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+#       gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+x-amazon-apigateway-request-validators:
+  Validator:
+    validateRequestParameters: true
+    validateRequestBody: true

@@ -3,14 +3,14 @@
 exports[`integ snapshot validation 1`] = `
 Object {
   "Outputs": Object {
-    "AlpsSpecRestApiEndpointBF7CCEC7": Object {
+    "AlpsSpecRestApiEndpointB3770DD2": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
           Array [
             "https://",
             Object {
-              "Ref": "AlpsSpecRestApi1E233117",
+              "Ref": "AlpsSpecRestApi18BF1E38",
             },
             ".execute-api.",
             Object {
@@ -22,7 +22,7 @@ Object {
             },
             "/",
             Object {
-              "Ref": "AlpsSpecRestApiDeploymentStageprod053E5D7D",
+              "Ref": "AlpsSpecRestApiDeploymentStageprod5A00266D",
             },
             "/",
           ],
@@ -30,47 +30,80 @@ Object {
       },
     },
   },
+  "Parameters": Object {
+    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2ArtifactHash04ACEE79": Object {
+      "Description": "Artifact hash for asset \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
+      "Type": "String",
+    },
+    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3Bucket88866489": Object {
+      "Description": "S3 bucket for asset \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
+      "Type": "String",
+    },
+    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D": Object {
+      "Description": "S3 key for asset version \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
+      "Type": "String",
+    },
+  },
   "Resources": Object {
-    "AlpsSpecRestApi1E233117": Object {
+    "AlpsSpecRestApi18BF1E38": Object {
       "Properties": Object {
-        "Name": "Alps Rest Api Gw",
+        "BodyS3Location": Object {
+          "Bucket": Object {
+            "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3Bucket88866489",
+          },
+          "Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Name": "SpecRestApi",
       },
       "Type": "AWS::ApiGateway::RestApi",
     },
-    "AlpsSpecRestApiANYC1250F32": Object {
-      "Properties": Object {
-        "AuthorizationType": "NONE",
-        "HttpMethod": "ANY",
-        "Integration": Object {
-          "Type": "MOCK",
-        },
-        "ResourceId": Object {
-          "Fn::GetAtt": Array [
-            "AlpsSpecRestApi1E233117",
-            "RootResourceId",
-          ],
-        },
-        "RestApiId": Object {
-          "Ref": "AlpsSpecRestApi1E233117",
-        },
-      },
-      "Type": "AWS::ApiGateway::Method",
-    },
-    "AlpsSpecRestApiAccount712D76CC": Object {
+    "AlpsSpecRestApiAccount9955DCA4": Object {
       "DependsOn": Array [
-        "AlpsSpecRestApi1E233117",
+        "AlpsSpecRestApi18BF1E38",
       ],
       "Properties": Object {
         "CloudWatchRoleArn": Object {
           "Fn::GetAtt": Array [
-            "AlpsSpecRestApiCloudWatchRole009F872B",
+            "AlpsSpecRestApiCloudWatchRole684B001D",
             "Arn",
           ],
         },
       },
       "Type": "AWS::ApiGateway::Account",
     },
-    "AlpsSpecRestApiCloudWatchRole009F872B": Object {
+    "AlpsSpecRestApiCloudWatchRole684B001D": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -101,25 +134,22 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlpsSpecRestApiDeploymentED5F4E0Cd6fa99e89976b5a43ee7aa458139c66a": Object {
-      "DependsOn": Array [
-        "AlpsSpecRestApiANYC1250F32",
-      ],
+    "AlpsSpecRestApiDeployment5AF0C3D44576fcbf36f8a64b52405e62ee671946": Object {
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": Object {
-          "Ref": "AlpsSpecRestApi1E233117",
+          "Ref": "AlpsSpecRestApi18BF1E38",
         },
       },
       "Type": "AWS::ApiGateway::Deployment",
     },
-    "AlpsSpecRestApiDeploymentStageprod053E5D7D": Object {
+    "AlpsSpecRestApiDeploymentStageprod5A00266D": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "AlpsSpecRestApiDeploymentED5F4E0Cd6fa99e89976b5a43ee7aa458139c66a",
+          "Ref": "AlpsSpecRestApiDeployment5AF0C3D44576fcbf36f8a64b52405e62ee671946",
         },
         "RestApiId": Object {
-          "Ref": "AlpsSpecRestApi1E233117",
+          "Ref": "AlpsSpecRestApi18BF1E38",
         },
         "StageName": "prod",
       },
