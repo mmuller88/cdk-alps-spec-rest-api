@@ -28,6 +28,12 @@ const project = new AwsCdkConstructLibrary({
     module: 'cdk_alps_spec_rest_api',
   },
   releaseBranches: ['main'],
+  keywords: [
+    'cdk',
+    'aws',
+    'alps',
+    'apigateway',
+  ],
 });
 
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log', 'tmp'];

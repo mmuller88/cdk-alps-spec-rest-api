@@ -76,6 +76,9 @@
     "yargs"
   ],
   "keywords": [
+    "alps",
+    "apigateway",
+    "aws",
     "cdk"
   ],
   "main": "lib/index.js",

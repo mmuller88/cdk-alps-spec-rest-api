@@ -15,9 +15,6 @@ export class IntegTesting {
 
     new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
       alpsSpecFile: 'src/todo-alps.yaml',
-      operationIdLambdaMapping: {
-        todoList: 'myOwnLambda',
-      },
     });
 
     this.stack = [stack];
