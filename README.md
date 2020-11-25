@@ -55,4 +55,4 @@ npx cdk --app lib/integ.default.js --profile <profile> destroy
 
 - (AWS) Authorizer and Validator are not supported yet
 - only alps YAML files are supported. alps JSON files will be added
-- only Lambda integrations are supported and the endpoints are per default mapped to lambdas with the same name as the operationId
+- only Lambda integrations are supported and the endpoints are per default mapped to lambdas with the same name as the operationId.
