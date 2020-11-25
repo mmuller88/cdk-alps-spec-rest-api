@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.0.9 (2020-11-25)
+
+
+### Bug Fixes
+
+* disable anti tamper check ([c92497c](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/c92497ce59ddb1c48b8fd42d8ee6275e48b8eb98))
+
 ### [0.0.8](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.0.7...v0.0.8) (2020-11-25)
 
 
