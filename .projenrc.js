@@ -8,6 +8,11 @@ const project = new AwsCdkConstructLibrary({
   repository: "https://github.com/mmuller88/cdk-alps-spec-rest-api.git",
   dependencies: {
     'unified':'https://github.com/mamund/alps-unified',
+    "js-yaml": "^3.14.0",
+    "@types/js-yaml": "^3.12.5",
+  },
+  devDependencies: {
+
   },
   cdkDependencies: [
     '@aws-cdk/core',

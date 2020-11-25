@@ -60,6 +60,8 @@
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.74.0",
     "@aws-cdk/core": "^1.74.0",
+    "@types/js-yaml": "^3.12.5",
+    "js-yaml": "^3.14.0",
     "unified": "https://github.com/mamund/alps-unified"
   },
   "bundledDependencies": [],
