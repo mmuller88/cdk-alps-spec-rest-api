@@ -17,7 +17,7 @@ The AWS CDK construct repo was generated with [Projen](https://github.com/projen
 
 The ALPS API converter is on GitHub on: https://github.com/mamund/alps-unified
 
-Very useful to understand the idea of ALPS API is this video on YouTube: https://www.youtube.com/watch?v=oG6-r3UdenE&t
+Very useful to understand the idea of ALPS API is this video on YouTube: https://www.youtube.com/watch?v=oG6-r3UdenE
 
 # Sample
 

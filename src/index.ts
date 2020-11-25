@@ -87,8 +87,8 @@ export class AlpsSpecRestApi extends cdk.Construct {
 function unified(alpSpec: string) {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { execSync } = require('child_process');
-  execSync(`/home/martin/git/cdk-alps-spec-rest-api/node_modules/unified/src/index.js -f ${alpSpec} -t oas -o tmp/oas.yaml`);
-  execSync('/home/martin/git/cdk-alps-spec-rest-api/node_modules/unified/src/index.js -f tmp/oas.yaml -t json -o tmp/oas.json');
+  execSync(`node_modules/unified/src/index.js -f ${alpSpec} -t oas -o tmp/oas.yaml`);
+  execSync('node_modules/unified/src/index.js -f tmp/oas.yaml -t json -o tmp/oas.json');
   const tmpOasFileString = fs.readFileSync('tmp/oas.json', { encoding: 'utf-8' });
   // console.log(`tmpOasFileString: ${tmpOasFileString}`);
   return JSON.parse(tmpOasFileString);
