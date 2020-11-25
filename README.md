@@ -4,11 +4,20 @@
 
 # CDK Alps Spec Rest Api
 
-CDK Construct library constructed with the help of Pahud https://www.youtube.com/watch?v=cTsSXYOYQPw&t=2s <3.
+The CDK Alps Spec Rest Api construct generates an AWS API Gateway out of an ALPS API yaml file such src/todo-alps.yaml. Alps Api is an abstraction of Apis like REST API or Graph QL. More about the ALPS API see in the ALPS API section.
 
-# ALPS
+The AWS CDK construct repo was generated with [Projen](https://github.com/projen/projen) as **awscdk-construct**
 
-https://github.com/mamund/alps-unified
+# Thanks
+
+- To Pahud for the helpful AWS CDK Construct video: https://www.youtube.com/watch?v=cTsSXYOYQPw
+- Mike Amundsen for the ALPS API idea and help
+
+# ALPS API
+
+The ALPS API converter is on GitHub on: https://github.com/mamund/alps-unified
+
+Very useful to understand the idea of ALPS API is this video on YouTube: https://www.youtube.com/watch?v=oG6-r3UdenE&t
 
 # Sample
 
@@ -17,7 +26,9 @@ const app = new cdk.App();
 
 const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
-new AlpsSpecRestApi(stack, 'AlpsSpecRestApi');
+new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
+  specFile: 'src/todo-oas.yaml',
+});
 ```
 
 # Deploy the CDK stack
@@ -25,3 +36,7 @@ new AlpsSpecRestApi(stack, 'AlpsSpecRestApi');
 ```ts
 npx cdk --app lib/integ.default.js --profile damadden88 deploy
 ```
+
+# Limitations / Issues / TODOS
+
+- (AWS) Authorizer and Validator are not supported yet
