@@ -1,25 +1,23 @@
 const { AwsCdkConstructLibrary } = require('projen');
 
-const alpsUnifiedDependencies = {
-  "unified": "https://github.com/mamund/alps-unified",
-  "boxen": "^4.2.0",
-  "chalk": "^4.1.0",
-  "yamljs": "^0.3.0",
-  "yargs": "^16.1.1",
-}
+const deps = [
+  'boxen',
+  'chalk',
+  'yamljs',
+  'yargs@16.1.1',
+  'unified@https://github.com/mamund/alps-unified'
+];
 
 const project = new AwsCdkConstructLibrary({
   authorAddress: "damadden88@googlemail.com",
   authorName: "Martin Mueller",
-  cdkVersion: "1.75.0",
   name: "cdk-alps-spec-rest-api",
+  defaultReleaseBranch: "main",
+  cdkVersion: "1.75.0",
   repository: "https://github.com/mmuller88/cdk-alps-spec-rest-api.git",
-  dependencies: {
-    ...alpsUnifiedDependencies,
-    "js-yaml": "^3.14.0",
-    "@types/js-yaml": "^3.12.5",
-  },
-  devDependencies: {},
+  deps: deps,
+  // peerDeps: deps,
+  bundledDeps: deps,
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-apigateway',

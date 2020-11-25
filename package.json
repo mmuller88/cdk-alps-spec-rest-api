@@ -11,7 +11,7 @@
     "projen": "node .projenrc.js",
     "no-changes": "(git log --oneline -1 | grep -q \"chore(release):\") && echo \"No changes to release.\"",
     "bump": "yarn run --silent no-changes || standard-version",
-    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin master)",
+    "release": "yarn run --silent no-changes || (yarn run bump && git push --follow-tags origin main)",
     "test": "rm -fr lib/ && jest --passWithNoTests --updateSnapshot && yarn run eslint",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot",
@@ -47,7 +47,7 @@
     "jsii-pacmak": "^1.14.1",
     "jsii-release": "^0.2.3",
     "json-schema": "^0.2.5",
-    "projen": "^0.3.178",
+    "projen": "^0.5.2",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "typescript": "^3.9.5"
@@ -62,15 +62,19 @@
     "@aws-cdk/aws-apigateway": "^1.75.0",
     "@aws-cdk/aws-iam": "^1.75.0",
     "@aws-cdk/core": "^1.75.0",
-    "@types/js-yaml": "^3.12.5",
     "boxen": "^4.2.0",
     "chalk": "^4.1.0",
-    "js-yaml": "^3.14.0",
     "unified": "https://github.com/mamund/alps-unified",
     "yamljs": "^0.3.0",
-    "yargs": "^16.1.1"
+    "yargs": "16.1.1"
   },
-  "bundledDependencies": [],
+  "bundledDependencies": [
+    "boxen",
+    "chalk",
+    "unified",
+    "yamljs",
+    "yargs"
+  ],
   "keywords": [
     "cdk"
   ],
@@ -92,7 +96,7 @@
       "category": 2
     },
     "release": {
-      "desc": "Bumps version & push to master",
+      "desc": "Bumps version & push to main",
       "command": "yarn run release",
       "category": 2
     },
