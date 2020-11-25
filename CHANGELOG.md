@@ -15,18 +15,12 @@ All notable changes to this project will be documented in this file. See [standa
 * Readme thanks and explanations ([4143e9c](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/4143e9c7f617c1348722fbba80e59238b2b04f26))
 * use alps unified repo for converting to open spec ([ed38a1b](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/ed38a1b6b3ed9a8e07a474096c7507bd23517132))
 * use alps unified repo for converting to open spec ([e36a7f7](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/e36a7f75cf40e07c4e7b5d9bb2d9fa6d5df6cb0d))
-* use alps unified repo for converting to open spec ([40cf9e3](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/40cf9e3a1c27bdb4a9bf2f7d843e1e436e831d2f))
+* use alps unified repo for converting to open spec ([40cf9e3](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/40cf9e3a1c27bdb4a9bf2f7d843e1e436e831d2f)
 
 
 ### Bug Fixes
 
 * disable anti tamper check ([c92497c](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/c92497ce59ddb1c48b8fd42d8ee6275e48b8eb98))
-* disable anti tamper check ([03c7567](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/03c75671c7b79e7813f9513464691f584c6708b2))
-* unified method ([3ac985f](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/3ac985fa1bdc628e0274ea06665731306e140a63))
-* unified method ([e5e8467](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/e5e84672493e895733e19843799c3a5c1c64e4f3))
-* unified method ([770537a](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/770537af82e1015ff661d2ec82fe72cbda77db85))
-* unified method ([147ed74](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/147ed7403959b4c7b1e740ea492d07febde08746))
-
 ### [0.0.8](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.0.7...v0.0.8) (2020-11-25)
 
 
