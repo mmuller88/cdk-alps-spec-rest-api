@@ -5,7 +5,7 @@ import * as cdk from '@aws-cdk/core';
 import * as yaml from 'js-yaml';
 
 export interface AlpsSpecRestApiProps {
-  /** 
+  /**
    * Optional mapping from openApi spec operationId to Lambda name.
    * Per default it uses a Lambda integration with using the openApi spec operationId property as Lambda name
    */
