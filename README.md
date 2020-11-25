@@ -4,7 +4,7 @@
 
 # CDK Alps Spec Rest Api
 
-The CDK Alps Spec Rest Api construct generates an AWS API Gateway out of an ALPS API yaml file such src/todo-alps.yaml. Alps Api is an abstraction of Apis like REST API or Graph QL. More about the ALPS API see in the ALPS API section.
+The CDK Alps Spec Rest Api construct generates an AWS API Gateway out of an ALPS API yaml file such src/todo-alps.yaml. ALPS API is an abstraction of APIs like REST API or Graph QL. More about the ALPS API see in the ALPS API section.
 
 The AWS CDK construct repo was generated with [Projen](https://github.com/projen/projen) as **awscdk-construct**
 
@@ -27,7 +27,7 @@ const app = new cdk.App();
 const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
 new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-  specFile: 'src/todo-alps.yaml',
+  alpsSpecFile: 'src/todo-alps.yaml',
 });
 ```
 
