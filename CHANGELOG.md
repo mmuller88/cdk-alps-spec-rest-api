@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.0.11...v0.1.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* add limitation ([e960646](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/e96064638fff2623d9843a93170246b64bcdfbf5))
+* add limitation ([f605fa7](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/f605fa744ffd324d7c94fc1cad69e13a2a7a5f11))
+
 ## [0.1.0](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.0.11...v0.1.0) (2020-11-25)
 
 
