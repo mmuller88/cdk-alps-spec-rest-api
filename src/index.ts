@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as apigw from '@aws-cdk/aws-apigateway';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
-import * as yaml from 'js-yaml';
+// import * as yaml from 'js-yaml';
 
 export interface AlpsSpecRestApiProps {
   /**
@@ -11,9 +11,9 @@ export interface AlpsSpecRestApiProps {
    */
   readonly operationIdLambdaMapping?: Record<string, string>;
   /**
-   * OpenApi Spec File. Can be YAML or JSON.
+   * ALPS Spec File. Must be YAML.
    */
-  readonly specFile: string;
+  readonly alpsSpecFile: string;
 }
 
 export class AlpsSpecRestApi extends cdk.Construct {
@@ -25,7 +25,6 @@ export class AlpsSpecRestApi extends cdk.Construct {
     this.operationIdLambdaMapping = props?.operationIdLambdaMapping;
 
     const apiRole = new iam.Role(scope, 'apiRole', {
-      //roleName: 'apiRole',
       assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
       managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonAPIGatewayPushToCloudWatchLogs')],
     });
@@ -37,30 +36,16 @@ export class AlpsSpecRestApi extends cdk.Construct {
       }),
     );
 
-    // const uni = unified;
-    const specFile = props.specFile;
+    const specFile = props.alpsSpecFile;
+    // const specFile = 'src/todo-alps.yaml';
 
-    const file = fs.readFileSync(specFile, { encoding: 'utf-8' });
-    console.log(`file: ${file}`);
-    let specJson;
-    try {
-      specJson = yaml.load(file);
-    } catch (err) {
-      try {
-        specJson = JSON.parse(file);
-      } catch (err2) {
-        // no YAML or JSON
-        console.log(`ERROR no YAML or JSON: ${err2}`);
-        throw new Error(`ERROR no YAML or JSON: ${err2}`);
-      }
-    }
-
-    console.log(`specJson: ${JSON.stringify(specJson)}`);
+    // convert ALPS yaml nach OAS JSON. WORKAROUND as currently alps-unified is an js cli tool
+    let oasSpecJSON: any = unified(specFile);
 
     const region = cdk.Stack.of(this).region;
     const accountId = cdk.Stack.of(this).account;
 
-    const endpointsJson = specJson.paths;
+    const endpointsJson = oasSpecJSON.paths;
     for (const endpoint of Object.keys(endpointsJson)) {
       console.log(`endpoint: ${JSON.stringify(endpoint)}`);
       for (const method of Object.values<any>(endpointsJson[endpoint])) {
@@ -87,14 +72,24 @@ export class AlpsSpecRestApi extends cdk.Construct {
       }
     }
 
-    console.log(`specJson after edit: ${JSON.stringify(specJson)}`);
+    console.log(`specJson after edit: ${JSON.stringify(oasSpecJSON)}`);
 
     const api = new apigw.SpecRestApi(this, 'SpecRestApi', {
       // restApiName: 'Alps Rest Api Gw',
       apiDefinition: apigw.ApiDefinition.fromInline(
-        specJson,
+        oasSpecJSON,
       ),
     });
     api;
   }
 }
+
+function unified(alpSpec: string) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { execSync } = require('child_process');
+  execSync(`/home/martin/git/cdk-alps-spec-rest-api/node_modules/unified/src/index.js -f ${alpSpec} -t oas -o tmp/oas.yaml`);
+  execSync('/home/martin/git/cdk-alps-spec-rest-api/node_modules/unified/src/index.js -f tmp/oas.yaml -t json -o tmp/oas.json');
+  const tmpOasFileString = fs.readFileSync('tmp/oas.json', { encoding: 'utf-8' });
+  // console.log(`tmpOasFileString: ${tmpOasFileString}`);
+  return JSON.parse(tmpOasFileString);
+};

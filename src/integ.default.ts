@@ -14,7 +14,7 @@ export class IntegTesting {
     const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
     new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-      specFile: 'src/todo-oas.yaml',
+      alpsSpecFile: 'src/todo-alps.yaml',
       operationIdLambdaMapping: {
         todoList: 'myOwnLambda',
       },

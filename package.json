@@ -63,8 +63,12 @@
     "@aws-cdk/aws-iam": "^1.75.0",
     "@aws-cdk/core": "^1.75.0",
     "@types/js-yaml": "^3.12.5",
+    "boxen": "^4.2.0",
+    "chalk": "^4.1.0",
     "js-yaml": "^3.14.0",
-    "unified": "https://github.com/mamund/alps-unified"
+    "unified": "https://github.com/mamund/alps-unified",
+    "yamljs": "^0.3.0",
+    "yargs": "^16.1.1"
   },
   "bundledDependencies": [],
   "keywords": [

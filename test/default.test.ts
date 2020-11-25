@@ -4,31 +4,14 @@ import '@aws-cdk/assert/jest';
 
 describe('create the AlpsSpecRestApi', () => {
   describe('correctly', () => {
-    test('from yaml', () => {
+    test('from alps yaml', () => {
       // GIVEN
       const app = new App();
       const stack = new Stack(app, 'testing-stack');
 
       // WHEN
       new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-        specFile: 'src/todo-oas.yaml',
-      });
-
-      // THEN
-      expect(stack).toHaveResource('AWS::ApiGateway::RestApi');
-      expect(stack).toHaveResource('AWS::ApiGateway::Stage', {
-        StageName: 'prod',
-      });
-    });
-
-    test('from json', () => {
-      // GIVEN
-      const app = new App();
-      const stack = new Stack(app, 'testing-stack');
-
-      // WHEN
-      new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-        specFile: 'src/todo-oas.json',
+        alpsSpecFile: 'src/todo-alps.yaml',
       });
 
       // THEN
@@ -45,7 +28,7 @@ describe('create the AlpsSpecRestApi', () => {
 
       // WHEN
       new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-        specFile: 'src/todo-oas.yaml',
+        alpsSpecFile: 'src/todo-alps.yaml',
         operationIdLambdaMapping: {
           todoList: 'myOwnLambda',
         },
@@ -67,28 +50,16 @@ describe('create the AlpsSpecRestApi', () => {
 
       expect(() => {
         new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-          specFile: 'src/abs',
+          alpsSpecFile: 'src/abs',
         });
       }).toThrowError();
 
       expect(() => {
         new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-          specFile: 'src/index.ts',
+          alpsSpecFile: 'src/index.ts',
         });
       }).toThrowError();
 
-    });
-
-    test('missing operationId in specFile', () => {
-      // GIVEN
-      const app = new App();
-      const stack = new Stack(app, 'testing-stack');
-
-      expect(() => {
-        new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-          specFile: 'src/todo-oas-missing-operationId.yaml',
-        });
-      }).toThrowError();
     });
   });
 

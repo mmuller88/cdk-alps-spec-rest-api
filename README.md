@@ -27,16 +27,31 @@ const app = new cdk.App();
 const stack = new cdk.Stack(app, 'my-demo-stack', { env });
 
 new AlpsSpecRestApi(stack, 'AlpsSpecRestApi', {
-  specFile: 'src/todo-oas.yaml',
+  specFile: 'src/todo-alps.yaml',
 });
 ```
 
-# Deploy the CDK stack
+# CDK stack commands
+
+## Diff
 
 ```ts
-npx cdk --app lib/integ.default.js --profile damadden88 deploy
+npx cdk --app lib/integ.default.js --profile <profile> diff
+```
+
+## Deploy
+
+```ts
+npx cdk --app lib/integ.default.js --profile <profile> deploy
+```
+
+## Destroy
+
+```ts
+npx cdk --app lib/integ.default.js --profile <profile> destroy
 ```
 
 # Limitations / Issues / TODOS
 
 - (AWS) Authorizer and Validator are not supported yet
+- only alps YAML files are supported. alps JSON files will be added
