@@ -40,11 +40,11 @@ Object {
                 "description": "todo item",
                 "properties": Object {
                   "body": Object {
-                    "example": "qa9skatpxclrm3l6iforcf",
+                    "example": "3nmv1utv57z3dx7ghiyqs",
                     "type": "string",
                   },
                   "id": Object {
-                    "example": 4308,
+                    "example": 6246,
                     "type": "string",
                   },
                 },
@@ -281,7 +281,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlpsSpecRestApiDeployment5AF0C3D455a285fea5d5be68da643c7d27723f9d": Object {
+    "AlpsSpecRestApiDeployment5AF0C3D409f7d36a399af31b571022603bc666a8": Object {
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": Object {
@@ -293,7 +293,7 @@ Object {
     "AlpsSpecRestApiDeploymentStageprod5A00266D": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "AlpsSpecRestApiDeployment5AF0C3D455a285fea5d5be68da643c7d27723f9d",
+          "Ref": "AlpsSpecRestApiDeployment5AF0C3D409f7d36a399af31b571022603bc666a8",
         },
         "RestApiId": Object {
           "Ref": "AlpsSpecRestApi18BF1E38",

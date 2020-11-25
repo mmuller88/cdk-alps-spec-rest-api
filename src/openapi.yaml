@@ -1,7 +1,7 @@
 openapi: "3.0.1"
 info:
-  title: "The Alfresco Provisioner "
-  description: "Again thank you so much for testing the Alfresco Provisioner."
+  title: "Real AWS API Gateway Spec File"
+  description: "In here is all what AWS API Gateway needs to create successfully."
 servers:
 - url: "https://api@@API_STAGE@@.alfpro.net"
 paths:
