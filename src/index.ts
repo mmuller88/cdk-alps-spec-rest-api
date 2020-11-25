@@ -39,7 +39,7 @@ export class AlpsSpecRestApi extends cdk.Construct {
     const specFile = props.alpsSpecFile;
     // const specFile = 'src/todo-alps.yaml';
 
-    // convert ALPS yaml nach OAS JSON. WORKAROUND as currently alps-unified is an js cli tool
+    // convert ALPS yaml to OAS JSON. WORKAROUND as currently alps-unified is an js cli tool
     let oasSpecJSON: any = unified(specFile);
 
     const region = cdk.Stack.of(this).region;
