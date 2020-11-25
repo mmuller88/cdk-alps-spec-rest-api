@@ -30,60 +30,207 @@ Object {
       },
     },
   },
-  "Parameters": Object {
-    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2ArtifactHash04ACEE79": Object {
-      "Description": "Artifact hash for asset \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
-      "Type": "String",
-    },
-    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3Bucket88866489": Object {
-      "Description": "S3 bucket for asset \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
-      "Type": "String",
-    },
-    "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D": Object {
-      "Description": "S3 key for asset version \\"8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2\\"",
-      "Type": "String",
-    },
-  },
   "Resources": Object {
     "AlpsSpecRestApi18BF1E38": Object {
       "Properties": Object {
-        "BodyS3Location": Object {
-          "Bucket": Object {
-            "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3Bucket88866489",
-          },
-          "Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D",
-                        },
-                      ],
-                    },
-                  ],
+        "Body": Object {
+          "components": Object {
+            "schemas": Object {
+              "todoItem": Object {
+                "description": "todo item",
+                "properties": Object {
+                  "body": Object {
+                    "example": "01oqjycmwd3nkf13sies1x",
+                    "type": "string",
+                  },
+                  "id": Object {
+                    "example": 8545,
+                    "type": "string",
+                  },
                 },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters8266410fdf12a4eb406dc2a1ebcf5e15ea71dafebcebe418a0ae95f29bf4dcc2S3VersionKeyABCA819D",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
+                "type": "object",
+              },
+            },
           },
+          "info": Object {
+            "description": "Simple Todo list example",
+            "title": "simpleTodo",
+            "version": "1.0.0",
+          },
+          "openapi": "3.0.1",
+          "paths": Object {
+            "/todoAdd": Object {
+              "post": Object {
+                "operationId": "todoAdd",
+                "requestBody": Object {
+                  "content": Object {
+                    "application/json": Object {
+                      "schema": Object {
+                        "$ref": "#/components/schemas/todoItem",
+                      },
+                    },
+                  },
+                },
+                "responses": Object {
+                  "200": Object {
+                    "content": Object {
+                      "application/json": Object {
+                        "schema": Object {
+                          "items": Object {
+                            "$ref": "#/components/schemas/todoItem",
+                          },
+                          "type": "array",
+                        },
+                      },
+                    },
+                    "description": "add todoAdd",
+                  },
+                },
+                "summary": "create a new todo item",
+                "x-amazon-apigateway-integration": Object {
+                  "credentials": Object {
+                    "Fn::GetAtt": Array [
+                      "apiRole0DDF0297",
+                      "Arn",
+                    ],
+                  },
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_match",
+                  "type": "aws_proxy",
+                  "uri": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:aws:apigateway:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/arn:aws:lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:todoAdd/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+            },
+            "/todoList": Object {
+              "get": Object {
+                "operationId": "todoList",
+                "responses": Object {
+                  "200": Object {
+                    "content": Object {
+                      "application/json": Object {
+                        "schema": Object {
+                          "items": Object {
+                            "$ref": "#/components/schemas/todoItem",
+                          },
+                          "type": "array",
+                        },
+                      },
+                    },
+                    "description": "get todoList",
+                  },
+                },
+                "summary": "return list of todo items",
+                "x-amazon-apigateway-integration": Object {
+                  "credentials": Object {
+                    "Fn::GetAtt": Array [
+                      "apiRole0DDF0297",
+                      "Arn",
+                    ],
+                  },
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_match",
+                  "type": "aws_proxy",
+                  "uri": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:aws:apigateway:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/arn:aws:lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:myOwnLambda/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+            },
+            "/todoRemove/{id}": Object {
+              "delete": Object {
+                "operationId": "todoRemove",
+                "parameters": Array [
+                  Object {
+                    "description": "id of todoRemove",
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "schema": Object {
+                      "type": "string",
+                    },
+                  },
+                ],
+                "responses": Object {
+                  "204": Object {
+                    "description": "delete todoRemove",
+                  },
+                },
+                "summary": "remove a single todo item",
+                "x-amazon-apigateway-integration": Object {
+                  "credentials": Object {
+                    "Fn::GetAtt": Array [
+                      "apiRole0DDF0297",
+                      "Arn",
+                    ],
+                  },
+                  "httpMethod": "POST",
+                  "passthroughBehavior": "when_no_match",
+                  "type": "aws_proxy",
+                  "uri": Object {
+                    "Fn::Join": Array [
+                      "",
+                      Array [
+                        "arn:aws:apigateway:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":lambda:path/2015-03-31/functions/arn:aws:lambda:",
+                        Object {
+                          "Ref": "AWS::Region",
+                        },
+                        ":",
+                        Object {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":function:todoRemove/invocations",
+                      ],
+                    ],
+                  },
+                },
+              },
+            },
+          },
+          "servers": Array [
+            Object {
+              "url": "http://api.example.org/todo",
+            },
+          ],
         },
         "Name": "SpecRestApi",
       },
@@ -134,7 +281,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "AlpsSpecRestApiDeployment5AF0C3D44576fcbf36f8a64b52405e62ee671946": Object {
+    "AlpsSpecRestApiDeployment5AF0C3D4736c2d748d9384524fb958a8e240fad2": Object {
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": Object {
@@ -146,7 +293,7 @@ Object {
     "AlpsSpecRestApiDeploymentStageprod5A00266D": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "AlpsSpecRestApiDeployment5AF0C3D44576fcbf36f8a64b52405e62ee671946",
+          "Ref": "AlpsSpecRestApiDeployment5AF0C3D4736c2d748d9384524fb958a8e240fad2",
         },
         "RestApiId": Object {
           "Ref": "AlpsSpecRestApi18BF1E38",
@@ -154,6 +301,58 @@ Object {
         "StageName": "prod",
       },
       "Type": "AWS::ApiGateway::Stage",
+    },
+    "apiRole0DDF0297": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "apiRoleDefaultPolicy771DC0DD": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "apiRoleDefaultPolicy771DC0DD",
+        "Roles": Array [
+          Object {
+            "Ref": "apiRole0DDF0297",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
     },
   },
 }

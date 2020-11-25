@@ -30,7 +30,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.74.0",
+    "@aws-cdk/assert": "^1.75.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -53,13 +53,15 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-apigateway": "^1.74.0",
-    "@aws-cdk/core": "^1.74.0",
+    "@aws-cdk/aws-apigateway": "^1.75.0",
+    "@aws-cdk/aws-iam": "^1.75.0",
+    "@aws-cdk/core": "^1.75.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-apigateway": "^1.74.0",
-    "@aws-cdk/core": "^1.74.0",
+    "@aws-cdk/aws-apigateway": "^1.75.0",
+    "@aws-cdk/aws-iam": "^1.75.0",
+    "@aws-cdk/core": "^1.75.0",
     "@types/js-yaml": "^3.12.5",
     "js-yaml": "^3.14.0",
     "unified": "https://github.com/mamund/alps-unified"

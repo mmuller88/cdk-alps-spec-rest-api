@@ -1,0 +1,36 @@
+openapi: 3.0.1
+
+info:
+  title: simpleTodo
+  description: Simple Todo list example
+  version: 1.0.0
+
+servers:
+- url: 'http://api.example.org/todo'
+
+paths:
+  /todoList:
+    get:
+      summary: 'return list of todo items'
+      responses:
+        200:
+          description: get todoList
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/todoItem'
+
+components:
+  schemas:
+    todoItem:
+      description: todo item
+      type: object
+      properties:
+          id:
+            type: string
+            example: 8545
+          body:
+            type: string
+            example: 01oqjycmwd3nkf13sies1x

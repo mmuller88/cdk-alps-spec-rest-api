@@ -3,7 +3,7 @@ const { AwsCdkConstructLibrary } = require('projen');
 const project = new AwsCdkConstructLibrary({
   authorAddress: "damadden88@googlemail.com",
   authorName: "Martin Mueller",
-  cdkVersion: "1.74.0",
+  cdkVersion: "1.75.0",
   name: "cdk-alps-spec-rest-api",
   repository: "https://github.com/mmuller88/cdk-alps-spec-rest-api.git",
   dependencies: {
@@ -17,6 +17,7 @@ const project = new AwsCdkConstructLibrary({
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-apigateway',
+    '@aws-cdk/aws-iam',
   ],
   python: {
     distName: 'cdk-alps-spec-rest-api',
