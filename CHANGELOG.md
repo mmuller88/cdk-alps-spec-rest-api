@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.4 (2020-12-11)
+
+
+### Features
+
+* add new alps-unified-ts lib ([3e9fa0d](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/3e9fa0d7797d156a09cf2517de466432a5aaab54))
+
 ### [0.1.3](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.1.2...v0.1.3) (2020-12-11)
 
 
