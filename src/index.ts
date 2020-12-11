@@ -1,8 +1,8 @@
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import * as apigw from '@aws-cdk/aws-apigateway';
 import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
-// import * as yaml from 'js-yaml';
+import { Alps, FormatType } from 'alps-unified-ts';
 
 export interface AlpsSpecRestApiProps {
   /**
@@ -39,8 +39,7 @@ export class AlpsSpecRestApi extends cdk.Construct {
     const specFile = props.alpsSpecFile;
     // const specFile = 'src/todo-alps.yaml';
 
-    // convert ALPS yaml to OAS JSON. WORKAROUND as currently alps-unified is an js cli tool
-    let oasSpecJSON: any = unified(specFile);
+    const oasSpecJSON = JSON.parse(Alps.unified(Alps.loadYaml(specFile), { formatType: FormatType.OPENAPI_JSON }));
 
     const region = cdk.Stack.of(this).region;
     const accountId = cdk.Stack.of(this).account;
@@ -83,13 +82,3 @@ export class AlpsSpecRestApi extends cdk.Construct {
     api;
   }
 }
-
-function unified(alpSpec: string) {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const { execSync } = require('child_process');
-  execSync(`node_modules/unified/src/index.js -f ${alpSpec} -t oas -o tmp/oas.yaml`);
-  execSync('node_modules/unified/src/index.js -f tmp/oas.yaml -t json -o tmp/oas.json');
-  const tmpOasFileString = fs.readFileSync('tmp/oas.json', { encoding: 'utf-8' });
-  // console.log(`tmpOasFileString: ${tmpOasFileString}`);
-  return JSON.parse(tmpOasFileString);
-};

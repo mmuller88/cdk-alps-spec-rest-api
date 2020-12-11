@@ -1079,6 +1079,13 @@ ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.3, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+alps-unified-ts@*:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/alps-unified-ts/-/alps-unified-ts-0.0.20.tgz#45d0f8851a5a904dce4aeddd45d7181a49bee77c"
+  integrity sha512-lEGGPofIKHGGVuVWAVCD08rvgE53PsvnEQx7Tk/LpoQDh3rhzGFZKiOZoDiSXuioqt2Y+WMlXlSo9/OI5/jYGA==
+  dependencies:
+    js-yaml "^3.14.0"
+
 ansi-align@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-3.0.0.tgz#b536b371cf687caaef236c18d3e21fe3797467cb"
@@ -3911,6 +3918,14 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^3.14.0:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
+  integrity sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -6218,10 +6233,6 @@ uglify-js@^3.1.4:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.12.0.tgz#b943f129275c41d435eb54b643bbffee71dccf57"
   integrity sha512-8lBMSkFZuAK7gGF8LswsXmir8eX8d2AAMOnxSDWjKBx/fBR6MypQjs78m6ML9zQVp1/hD4TBdfeMZMC7nW1TAA==
-
-"unified@https://github.com/mamund/alps-unified":
-  version "0.0.0"
-  resolved "https://github.com/mamund/alps-unified#c3100acdac0442cbab95126550075e19144262bb"
 
 union-value@^1.0.0:
   version "1.0.1"

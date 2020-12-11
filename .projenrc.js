@@ -5,7 +5,8 @@ const deps = [
   'chalk',
   'yamljs',
   'yargs@16.1.1',
-  'unified@https://github.com/mamund/alps-unified'
+  // 'unified@https://github.com/mamund/alps-unified'
+  'alps-unified-ts'
 ];
 
 const project = new AwsCdkConstructLibrary({
