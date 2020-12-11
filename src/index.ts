@@ -73,12 +73,11 @@ export class AlpsSpecRestApi extends cdk.Construct {
 
     console.log(`specJson after edit: ${JSON.stringify(oasSpecJSON)}`);
 
-    const api = new apigw.SpecRestApi(this, 'SpecRestApi', {
+    new apigw.SpecRestApi(this, 'SpecRestApi', {
       // restApiName: 'Alps Rest Api Gw',
       apiDefinition: apigw.ApiDefinition.fromInline(
         oasSpecJSON,
       ),
     });
-    api;
   }
 }

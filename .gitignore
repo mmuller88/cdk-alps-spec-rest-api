@@ -48,6 +48,7 @@ cdk.context.json
 images
 yarn-error.log
 tmp
+!/.projen/tasks.json
 !/package.json
 !/.npmignore
 !/LICENSE
