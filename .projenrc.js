@@ -1,11 +1,6 @@
 const { AwsCdkConstructLibrary } = require('projen');
 
 const deps = [
-  'boxen',
-  'chalk',
-  'yamljs',
-  'yargs@16.1.1',
-  // 'unified@https://github.com/mamund/alps-unified'
   'alps-unified-ts',
 ];
 
@@ -24,6 +19,11 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-apigateway',
     '@aws-cdk/aws-iam',
   ],
+  java: {
+    javaPackage: 'com.github.mmuller88.cdkAlpsSpecRestApi',
+    mavenGroupId: 'com.github.mmuller88',
+    mavenArtifactId: 'cdk-alps-spec-rest-api',
+  },
   python: {
     distName: 'cdk-alps-spec-rest-api',
     module: 'cdk_alps_spec_rest_api',
