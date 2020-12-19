@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.5 (2020-12-19)
+
+
+### Features
+
+* publish maven too ([87e6e45](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/87e6e45207016194e9c12c5ac23efd49831aab0c))
+
 ### 0.1.4 (2020-12-11)
 
 
