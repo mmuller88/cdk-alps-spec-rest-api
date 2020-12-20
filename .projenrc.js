@@ -24,6 +24,10 @@ const project = new AwsCdkConstructLibrary({
     mavenGroupId: 'com.github.mmuller88',
     mavenArtifactId: 'cdk-alps-spec-rest-api',
   },
+  dotnet: {
+    dotNetNamespace: 'com.github.mmuller88',
+    packageId: 'com.github.mmuller88.CdkAlpsSpecRestApi',
+  },
   python: {
     distName: 'cdk-alps-spec-rest-api',
     module: 'cdk_alps_spec_rest_api',

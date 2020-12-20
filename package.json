@@ -120,6 +120,10 @@
       "python": {
         "distName": "cdk-alps-spec-rest-api",
         "module": "cdk_alps_spec_rest_api"
+      },
+      "dotnet": {
+        "namespace": "com.github.mmuller88",
+        "packageId": "com.github.mmuller88.CdkAlpsSpecRestApi"
       }
     },
     "tsc": {
