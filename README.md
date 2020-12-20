@@ -1,6 +1,7 @@
 [![NPM version](https://badge.fury.io/js/cdk-alps-spec-rest-api.svg)](https://badge.fury.io/js/cdk-alps-spec-rest-api)
 [![PyPI version](https://badge.fury.io/py/cdk-alps-spec-rest-api.svg)](https://badge.fury.io/py/cdk-alps-spec-rest-api)
 [![Maven version](https://maven-badges.herokuapp.com/maven-central/com.github.mmuller88.cdkAlpsSpecRestApi/cdk-alps-spec-rest-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.mmuller88.cdkAlpsSpecRestApi/cdk-alps-spec-rest-api)
+[![.NET version](https://img.shields.io/nuget/v/com.github.mmuller88.CdkAlpsSpecRestApi.svg?style=flat-square)](https://www.nuget.org/packages/com.github.mmuller88.CdkAlpsSpecRestApi/)
 
 ![Release](https://github.com/mmuller88/cdk-alps-spec-rest-api/workflows/Release/badge.svg)
 
