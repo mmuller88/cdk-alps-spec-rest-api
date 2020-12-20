@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 0.1.8 (2020-12-20)
+
+
+### Features
+
+* publish to nuget ([6de12ca](https://github.com/mmuller88/cdk-alps-spec-rest-api/commit/6de12ca422ef210a18bfd3eb55b2a07df00d6d65))
+
 ### [0.1.7](https://github.com/mmuller88/cdk-alps-spec-rest-api/compare/v0.1.6...v0.1.7) (2020-12-19)
 
 
