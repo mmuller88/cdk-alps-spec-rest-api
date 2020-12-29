@@ -4,16 +4,16 @@
     "type": "git",
     "url": "https://github.com/mmuller88/cdk-alps-spec-rest-api.git"
   },
-  "bin": {},
   "scripts": {
     "projen": "npx projen",
     "start": "npx projen start",
+    "clobber": "npx projen clobber",
     "compile": "npx projen compile",
+    "test:compile": "npx projen test:compile",
     "test": "npx projen test",
     "build": "npx projen build",
     "bump": "npx projen bump",
     "release": "npx projen release",
-    "bootstrap": "npx projen bootstrap",
     "test:watch": "npx projen test:watch",
     "test:update": "npx projen test:update",
     "projen:upgrade": "npx projen projen:upgrade",
@@ -46,7 +46,7 @@
     "jsii-pacmak": "^1.16.0",
     "jsii-release": "^0.2.8",
     "json-schema": "^0.2.5",
-    "projen": "^0.5.10",
+    "projen": "^0.12.2",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "typescript": "^3.9.5"
